@@ -8,5 +8,11 @@ from YokoCino.forms import *
 def inicio(request):
     return render(request, "YokoCino/inicio.html")
 
+def home(request):
+    return render(request, "YokoCino/home.html")
+
 def blog(request):
     return render(request, "YokoCino/blog.html")
+
+def about(request):
+    return render(request, "YokoCino/about.html")

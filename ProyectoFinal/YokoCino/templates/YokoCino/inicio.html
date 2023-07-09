@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <!-- basic -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- mobile metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+        <!-- site metas -->
+        <title>YokoCino</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- bootstrap css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'YokoCino/css/bootstrap.min.css'%}"/>
+        <!-- style css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'YokoCino/css/style.css'%}">
+        <!-- overwrite css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'YokoCino/css/overwrite.css'%}"/>
+    </head>
+    <body>
+    <!--header section start -->
+    <div class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="logo"><a href="{% url 'Home' %}"><img src="{% static 'YokoCino/assets/logo.png'%}"></a></div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'Home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'Blog' %}">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'About' %}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Iniciar sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Registrarse</a>
+                        </li>
+                        <!--
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!--header section end -->
+    <!-- gallery section start -->
+    <div class="gallery_section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="gallery_taital">Yoko Cino</h1>
+                    <p class="gallery_text">Blog para compartir las recetas de la awela</p>
+                </div>
+            </div>
+            <div class="container">
+                <!--
+                <p class="container_main">Dinamico</p>
+                -->
+                {% block bloqueDinamico %}
+                {% endblock %}
+            </div>
+    <!-- gallery section end -->
+    <!-- footer section start -->
+    <div class="footer_section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <h3 class="useful_text">Nosotros</h3>
+                    <p class="footer_text">Nadie merece a las abuelas, vos tampoco, pero seguro hay una receta para inmortalizar. No seas rata, yo tambien quiero probar el guiso de tu awela</p>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <h3 class="useful_text">Menu</h3>
+                    <div class="footer_menu">
+                        <ul>
+                            <li><a href="{% url 'Home' %}">Home</a></li>
+                            <li><a href="{% url 'Blog' %}">Blog</a></li>
+                            <li><a href="{% url 'About' %}">About</a></li>
+                            <li><a href="#">Iniciar sesión</a></li>
+                            <li><a href="#">Registrarse</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <h1 class="useful_text">Links Útiles</h1>
+                    <p class="dummy_text">Placeholder modificable con links</p>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <h1 class="useful_text">Contacto</h1>
+                    <div class="location_text">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i><span class="padding_left_10">Dirección : Calle ejemplo</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                <i class="fa fa-phone" aria-hidden="true"></i><span class="padding_left_10">Teléfono : +54 1234567890</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                <i class="fa fa-envelope" aria-hidden="true"></i><span class="padding_left_10">Email : ejemplo@gmail.com</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer section end -->
+    <!-- copyright section start -->
+        <div class="copyright_section">
+            <div class="container">
+                <p class="copyright_text">2023 Todos los derechos reservados. Desarrollado por Furtado, Julio César como proyecto final para CoderHouse - Python #54485</a></p>
+            </div>
+        </div>
+    <!-- copyright section end -->        
+    </body>
+</html>
