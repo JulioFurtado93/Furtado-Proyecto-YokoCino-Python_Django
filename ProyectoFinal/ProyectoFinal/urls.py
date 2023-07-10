@@ -23,7 +23,7 @@ urlpatterns = [
     path('',include('YokoCino.urls')),
     path('admin/', admin.site.urls),
     path('YokoCino/',include('YokoCino.urls')),
-    path('Accounts/',include('Accounts.urls')),
+    path('Accounts/',include('Accounts.urls'),),
     #path('Messages/',include('Messages.urls'))
 ]
 

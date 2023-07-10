@@ -4,6 +4,7 @@ from YokoCino.models import *
 from Accounts.models import *
 from YokoCino.forms import *
 from Accounts.views import getavatar
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -19,6 +20,7 @@ def blog(request):
     publicaciones = Blog.objects.all()
     return render(request, "YokoCino/blog.html", {'publicaciones':publicaciones})
 
+@login_required
 def setEntry(request):
     if request.method == 'POST':
         miFormulario = formSetBlog(request.POST)

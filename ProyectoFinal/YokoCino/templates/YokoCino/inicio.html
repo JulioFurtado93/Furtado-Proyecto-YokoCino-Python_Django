@@ -41,15 +41,24 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'About' %}">About</a>
                         </li>
+                        {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href=""><img src="{{avatar}}"></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../Accounts/login">Iniciar sesión</a>
+                            <a class="nav-link" href="/Accounts/profileEdit/">Actualizar perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../Accounts/register">Registrarse</a>
+                            <a class="nav-link" href="/Accounts/logout/">Cerrar sesión</a>
                         </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Accounts/login/">Iniciar sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Accounts/register/">Registrarse</a>
+                        </li>
+                        {% endif %}
                         <!--
                         <li class="nav-item">
                             <a class="nav-link" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
@@ -96,7 +105,7 @@
                             <!--
                             {% if not request.user.is_authenticated %}
                             -->
-                            <li><a href="../Accounts/login">Iniciar sesión</a></li>
+                            <li><a href="/Accounts/Login">Iniciar sesión</a></li>
                             <li><a href="../Accounts/register">Registrarse</a></li>
                             <!--
                             {% endif %}

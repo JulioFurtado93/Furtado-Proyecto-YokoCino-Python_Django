@@ -1,28 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.forms import AuthenticationForm #UserCreationForm
 from django.contrib.auth import login,logout,authenticate
 from Accounts.forms import *
 from Accounts.models import *
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 # Create your views here.
 
 def login_request(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data = request.POST)
-        if form.is_valid():  # Si pasó la validación de Django
-            usuario = form.cleaned_data.get('username')
-            contrasenia = form.cleaned_data.get('password')
-            user = authenticate(username= usuario, password=contrasenia)
-            if user is not None:
-                login(request, user)
-                return render(request, "YokoCino/home.html", {"mensaje":f"Bienvenido {usuario}"})
-            else:
-                return render(request, "YokoCino/home.html", {"mensaje":"Datos incorrectos"})
+    if request.method == "POST":
+        user = authenticate(username = request.POST['user'], password = request.POST['password'])
+        if user is not None:
+            login(request, user)
+            return redirect('/YokoCino/')
         else:
-            return render(request, "YokoCino/home.html", {"mensaje":"Formulario erroneo"})
-    form = AuthenticationForm()
-    return render(request, "Accounts/login.html", {"form": form})
+            return render(request, 'Accounts/login.html', {'error': 'Usuario o contraseña incorrectos'})
+    else:
+        return render(request, 'Accounts/login.html')
 
 def register(request):
     if request.method == 'POST':
@@ -36,6 +31,10 @@ def register(request):
         #form = UserCreationForm()       
         form = UserRegisterForm()     
     return render(request,"Accounts/register.html" ,  {"form":form})
+
+def logout_request(request):
+    logout(request)
+    return redirect(reverse('Home'))
 
 @login_required
 def profileEdit(request):
