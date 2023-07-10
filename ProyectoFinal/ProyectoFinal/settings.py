@@ -126,7 +126,13 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Images
+# IMAGES
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+# REDIRECTS DE SESION
+
+LOGIN_URL = 'Accounts/login'
+LOGIN_REDIRECT_URL = 'YokoCino/home'
+LOGOUT_REDIRECT_URL = 'YokoCino/home'

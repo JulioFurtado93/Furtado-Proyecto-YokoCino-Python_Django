@@ -2,6 +2,18 @@
     {% extends "YokoCino/inicio.html" %}
     {% load static %}
         {% block bloqueDinamico %}
+            <!--
             <p class="container_main">Dinamico Home</p>
+            -->
+            {% for publicacion in publicaciones %}
+            <article>
+                <h1>{{publicacion.title}}</h1>
+                <h3>{{publicacion.subtitle}}</h3>
+                <p>{{publicacion.cuerpo}}</p>
+                <!--imagen-->
+                <p>Autor: {{publicacion.author}}</p>
+                <p>{{publicacion.fecha}}</p>
+            </article>
+            {% endfor %}
         {% endblock %}
 </div>

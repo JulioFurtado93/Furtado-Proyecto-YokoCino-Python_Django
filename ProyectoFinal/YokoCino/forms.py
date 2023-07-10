@@ -6,4 +6,4 @@ class formSetBlog(forms.Form):
     cuerpo = forms.CharField(max_length=1000)
     author = forms.CharField(max_length=40)
     fecha = forms.DateField()
-    #imagen
+    imagen = forms.ImageField()
