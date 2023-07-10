@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm #UserCreationForm
 from django.contrib.auth import login,logout,authenticate
 from Accounts.forms import *
+from Accounts.models import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -34,3 +36,34 @@ def register(request):
         #form = UserCreationForm()       
         form = UserRegisterForm()     
     return render(request,"Accounts/register.html" ,  {"form":form})
+
+@login_required
+def profileEdit(request):
+    usuario = request.user
+    if request.method == 'POST':
+        miFormulario = UserEditForm(request.POST)
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+            usuario.email = informacion['email']
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
+            usuario.first_name = informacion['first_name']
+            usuario.last_name = informacion['last_name']
+            usuario.save()
+            return render(request, "YokoCino/inicio.html")
+    else:
+        miFormulario = UserEditForm(initial={'email': usuario.email})
+    return render(request, "Accounts/profileEdit.html", {"miFormulario": miFormulario, "usuario": usuario})
+
+@login_required
+def addAvatar(request):
+    if request.method == 'POST':
+        miFormulario = AvatarForm(request.POST, request.FILES)
+        if miFormulario.is_valid:
+            u = User.objects.get(username=request.user)
+            avatar = Avatar(user=u, imagen=miFormulario.cleaned_data['imagen'])
+            avatar.save()
+            return render(request,"YokoCino/inicio.html")
+    else:
+        miFormulario = AvatarForm()
+    return render(request,"Accounts/addAvatar.html",{'miFormulario':miFormulario})

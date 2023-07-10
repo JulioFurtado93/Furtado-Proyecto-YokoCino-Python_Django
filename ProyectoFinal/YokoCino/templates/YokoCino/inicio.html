@@ -42,10 +42,10 @@
                             <a class="nav-link" href="{% url 'About' %}">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Iniciar sesión</a>
+                            <a class="nav-link" href="../Accounts/login">Iniciar sesión</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Registrarse</a>
+                            <a class="nav-link" href="../Accounts/register">Registrarse</a>
                         </li>
                         <!--
                         <li class="nav-item">
@@ -90,8 +90,17 @@
                             <li><a href="{% url 'Home' %}">Home</a></li>
                             <li><a href="{% url 'Blog' %}">Blog</a></li>
                             <li><a href="{% url 'About' %}">About</a></li>
-                            <li><a href="#">Iniciar sesión</a></li>
-                            <li><a href="#">Registrarse</a></li>
+                            <!--
+                            {% if not request.user.is_authenticated %}
+                            -->
+                            <li><a href="../Accounts/login">Iniciar sesión</a></li>
+                            <li><a href="../Accounts/register">Registrarse</a></li>
+                            <!--
+                            {% endif %}
+                            {% if request.user.is.authenticated %}
+                            <li><p class="text-muted small mb-4 mb-lg-0">Hola, {{user.username}}</p></li>
+                            {% endif %}
+                            -->
                         </ul>
                     </div>
                 </div>
