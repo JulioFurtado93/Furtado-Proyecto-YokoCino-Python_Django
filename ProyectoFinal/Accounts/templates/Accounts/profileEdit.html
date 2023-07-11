@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +8,25 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Formulario - Editar Perfil</h1>
-    <h1>De {{usuario}}</h1>
-    <form action="" method="POST">{% csrf_token %}
-        <table>
-            {{ miFormulario.as_table }}
-        </table>
-        <input type="submit", value="Enviar">
-    </form>  
+-->
+<div>
+    {% extends "YokoCino/inicio.html" %}
+    {% load static %}
+        {% block bloqueDinamico %}
+            <h1>Formulario - Editar Perfil</h1>
+            <h1>De {{usuario}}</h1>
+            {% if avatar_url %}
+            <img src="{{ avatar_url }}" width="100px" alt="Avatar">
+            {% endif %}
+            <form action="" method="POST">{% csrf_token %}
+                <table>
+                    {{ miFormulario.as_table }}
+                </table>
+                <input type="submit", value="Enviar">
+            </form>  
+        {% endblock %}
+</div>
+<!--
 </body>
 </html>
+-->

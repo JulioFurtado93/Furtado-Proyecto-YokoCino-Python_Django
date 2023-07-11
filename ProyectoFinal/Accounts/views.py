@@ -36,9 +36,15 @@ def logout_request(request):
     logout(request)
     return redirect(reverse('Home'))
 
+@login_required  
+def profile(request):
+    avatar_url = getavatar(request)
+    return render(request, 'Accounts/profile.html',{'usuario': request.user, 'avatar_url': avatar_url})
+
 @login_required
 def profileEdit(request):
     usuario = request.user
+    avatar_url = getavatar(request)
     if request.method == 'POST':
         miFormulario = UserEditForm(request.POST)
         if miFormulario.is_valid():
@@ -52,7 +58,7 @@ def profileEdit(request):
             return render(request, "YokoCino/home.html")
     else:
         miFormulario = UserEditForm(initial={'email': usuario.email})
-    return render(request, "Accounts/profileEdit.html", {"miFormulario": miFormulario, "usuario": usuario})
+    return render(request, "Accounts/profileEdit.html", {"miFormulario": miFormulario, "usuario": usuario,"avatar_url":avatar_url})
 
 @login_required
 def addAvatar(request):
@@ -68,9 +74,18 @@ def addAvatar(request):
     return render(request,"Accounts/addAvatar.html",{'miFormulario':miFormulario})
 
 def getavatar(request):
-    avatar = Avatar.objects.filter(user = request.user.id)
-    try:
-        avatar = avatar[0].image.url
-    except:
-        avatar = None
-    return avatar
+    avatar = Avatar.objects.filter(user=request.user).first()
+    if avatar:
+        avatar_url = avatar.imagen.url
+    else:
+        avatar_url = None
+    return avatar_url
+
+
+#def getavatar(request):
+#    avatar = Avatar.objects.filter(user = request.user.id)
+#    try:
+#        avatar = avatar[0].image.url
+#    except:
+#        avatar = None
+#    return avatar

@@ -9,8 +9,9 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def inicio(request):
-    avatar = getavatar(request)
-    return render(request, "YokoCino/inicio.html", {"avatar":avatar})
+    avatar_url = getavatar(request)
+    print (avatar_url)
+    return render(request, "YokoCino/inicio.html", {"avatar_url":avatar_url})
 
 def home(request):
     publicaciones = Blog.objects.all()

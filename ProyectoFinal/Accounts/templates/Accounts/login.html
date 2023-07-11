@@ -1,34 +1,11 @@
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="" method="POST">
-        {% csrf_token %}
-            {{ form.as_p }}
-        <button type="submit">Inciar sesion</button>
-</body>
-</html>
--->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div>
+    {% extends "YokoCino/inicio.html" %}
     {% load static %}
-    <link href="{% static 'YokoCino/css/overwrite.css'%}" rel="stylesheet"/>
-    <link href="{% static 'YokoCino/css/bootstrap.min.css'%}" rel="stylesheet"/>
-    <title>Login</title>
-</head>
-<body>
-    <div class="containerForm"> 
-        <form action="" method="POST" class="formLogin"> {% csrf_token %}
-            <h3 style="color: white; font-weight:bold; margin-bottom: 30px; display: flex; justify-content: center; align-items: center;">LOGIN</h3>
+        {% block bloqueDinamico %}
+    <div> 
+        <form action="" method="POST"> {% csrf_token %}
+            <h3>LOGIN</h3>
             <div>
                 <input name="user" type="text" placeholder="User" class="inputLogin">
             </div>
@@ -38,11 +15,17 @@
             <div>
                 <button class="btn btn-primary" type="submit">Login</button>
             </div>
+            <!--
             {% if error %}
                 <p style="color: red;">{{error}}</p>
             {% endif %}
             <p style="color: white;">Aun no tienes una cuenta? <a href="/Accounts/register">Registrate</a></p>
+            -->
         </form>
     </div>
+    {% endblock %}
+</div>
+<!--
 </body>
 </html>
+-->
