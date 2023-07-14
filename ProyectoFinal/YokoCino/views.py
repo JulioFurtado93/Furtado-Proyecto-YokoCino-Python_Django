@@ -7,7 +7,7 @@ from YokoCino.forms import *
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
+#from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -77,6 +77,19 @@ def detallePost(request,slug):
 #def blog(request):
 #    publicaciones = Blog.objects.all()
 #    return render(request, "YokoCino/blog.html", {'publicaciones':publicaciones})
+
+@login_required
+def setPost(request):
+    if request.method == 'POST':
+        miFormulario = formSetPost(request.POST)
+        if miFormulario.is_valid:
+            data = miFormulario.cleaned_data
+            post = Post(titulo=data["titulo"],slug=data["slug"],descripcion=data["descripcion"],contenido=data["contenido"],imagen=data["imagen"],autor=data["autor"],categoria=data["categoria"],estado=data["estado"])    
+            post.save()
+            return render(request,"YokoCino/home.html")    
+    else:
+        miFormulario = formSetPost()
+    return render(request, "YokoCino/setPost.html", {"miFormulario":miFormulario})
 
 #@login_required
 #def setEntry(request):

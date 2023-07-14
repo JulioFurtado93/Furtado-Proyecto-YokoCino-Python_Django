@@ -1,4 +1,5 @@
 from django import forms
+from YokoCino.models import *
 
 class formSetBlog(forms.Form):
     title = forms.CharField(max_length=100)
@@ -7,3 +8,8 @@ class formSetBlog(forms.Form):
     author = forms.CharField(max_length=40)
     fecha = forms.DateField()
     imagen = forms.ImageField()
+
+class formSetPost(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['titulo', 'slug', 'descripcion', 'contenido', 'imagen', 'autor', 'categoria', 'estado']

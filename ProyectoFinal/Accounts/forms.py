@@ -20,10 +20,12 @@ class UserEditForm(UserCreationForm):
     password2 = forms.CharField(label='Repetir la contraseña', widget=forms.PasswordInput)
     first_name = forms.CharField(label='Modificar nombre')
     last_name = forms.CharField(label='Modificar apellido')
+    descripcion = forms.CharField(label='Modificar descripción',max_length=100, required=False)
+    link = forms.URLField(label='Link', required=False)
 
     class Meta:
         model = User
-        fields = ['email', 'password1', 'password2', 'first_name', 'last_name']
+        fields = ['email', 'password1', 'password2', 'first_name', 'last_name', 'descripcion', 'link']
 
 class AvatarForm(forms.Form):
     avatar = forms.ImageField()
