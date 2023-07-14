@@ -4,14 +4,18 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', home, name='Home'),
+    path('', inicio, name= 'Inicio'),
     path('inicio/', inicio, name='Inicio'),
-    path('blog/', blog, name='Blog'),
-    path('setEntry/', setEntry, name="setEntry"),
-    path('getEntry/', getEntry, name="getEntry"),
-    path('searchEntry/', searchEntry, name="searchEntry"),
+    #path('blog/', blog, name='Blog'),
+    #path('setEntry/', setEntry, name="setEntry"),
+    #path('getEntry/', getEntry, name="getEntry"),
+    #path('searchEntry/', searchEntry, name="searchEntry"),
+    path('ensaladas/', ensaladas, name = 'Ensaladas'),
+    path('carnes/', carnes, name = 'Carnes'),
+    path('guisos/', guisos, name = 'Guisos'),
     path('about/', about, name='About'),
-    path('publicacion/<int:pk>/', detalle_publicacion, name='detalle_publicacion'),
+    path('<slug:slug>/',detallePost, name = 'detalle_post'),
+    #path('publicacion/<int:pk>/', detalle_publicacion, name='detalle_publicacion'),
 ]
 
 if settings.DEBUG:

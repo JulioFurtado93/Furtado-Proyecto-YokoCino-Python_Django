@@ -56,79 +56,11 @@
                 </div>
             </div>
         </header>
-{% block busqueda %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 search">
-            <form class="" action="{% url 'Inicio' %}" method="get">
-                <div id="custom-search-input">
-                    <div class="input-group col-md-12">
-                        <input type="text" class="form-control" placeholder="Buscar" name="buscar">
-                        <span class="input-group-list">
-                            <i class="icon icon-search"></i>
-                            <button type="submit" class="boton btn-primary">Buscar</button>
-                        </span>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-{% endblock busqueda %}
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                 {% block main_content %}
-                    <!-- Post preview-->
-                    {% if posts %}
-                        {% for post in posts %}
-                            <div class="post-preview">
-                                <a href="{% url 'detalle_post' post.slug %}">
-                                    <h2 class="post-title">{{ post.titulo }}</h2>
-                                    <h3 class="post-subtitle">{{ post.descripcion }}</h3>
-                                </a>
-                                <p class="post-meta">
-                                    Creado por
-                                    <strong>{{ post.autor }}</strong>
-                                    el {{ post.fecha_creacion }}
-                                </p>
-                            </div>
-                            <hr class="my-4" />
-                        {% endfor %}
-                    {% else %}
-                        <h1>No hay post registrados</h1>
-                    {% endif %}
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Pager-->
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 float-left">
-                                {% if posts.has_previous %}
-                                    <div class="clearfix">
-                                        <a href="?page={{ posts.previous_page_number }}
-                                        {% if request.GET.search %}
-                                        &q={{ request.GET.search }}
-                                        {% endif %}
-                                        " class="btn btn-primary float-left">Anterior</a>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 float-right">
-                                {% if posts.has_next %}
-                                    <div class="clearfix">
-                                        <a href="?page={{ posts.next_page_number }}" class="btn btn-primary float-left">Siguiente</a>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                    <!--
-                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
-                    -->
                 </div>
                 {% endblock main_content %}
             </div>

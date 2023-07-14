@@ -2,24 +2,21 @@
 {% load static %}
 
 {% block title %}
-    About
+    {{ detalle_post.titulo }}
 {% endblock title %}
 
 {% block back_img %}
+    {{detalle_post.imagen}}
 {% endblock back_img %}
 
 {% block main_title %}
-    <h1>About</h1>
+    <h1>{{detalle_post.titulo}}</h1>
+    <h6>{{detalle_post.descripcion}}</h6>
 {% endblock main_title %}
 
 {% block busqueda %}
 {% endblock busqueda %}
 
 {% block main_content %}
-    <p class="container_main">
-        Este blog fue creado para compartir recetas.
-        Es una idea sencilla para cubrir las consignas del Proyecto Final
-        para CoderHouse - Python #54485
-        por Furtado, Julio Cesar
-    </p>
+    {{detalle_post.contenido | safe}}
 {% endblock main_content %}
