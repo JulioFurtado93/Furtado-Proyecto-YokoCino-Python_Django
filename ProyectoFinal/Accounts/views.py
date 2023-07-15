@@ -86,6 +86,23 @@ def getavatar(request):
         avatar_url = None
     return avatar_url
 
+@login_required
+def sendMessage(request):
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = request.user
+            message.save()
+            return render(request,'YokoCino/inicio.html')
+    else:
+        form = MessageForm()    
+    return render(request, 'Accounts/sendMessage.html', {'form': form})
+
+@login_required
+def inbox(request):
+    messages = Message.objects.filter(recipient=request.user).order_by('-timestamp')
+    return render(request, 'Accounts/inbox.html', {'messages': messages})
 
 #def getavatar(request):
 #    avatar = Avatar.objects.filter(user = request.user.id)

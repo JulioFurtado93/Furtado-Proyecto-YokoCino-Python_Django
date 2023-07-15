@@ -1,4 +1,5 @@
 from django import forms
+from Accounts.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -29,3 +30,10 @@ class UserEditForm(UserCreationForm):
 
 class AvatarForm(forms.Form):
     avatar = forms.ImageField()
+
+class MessageForm(forms.ModelForm):
+    recipient = forms.ModelChoiceField(queryset=User.objects.all(), empty_label=None)
+
+    class Meta:
+        model = Message
+        fields = ['recipient', 'content']

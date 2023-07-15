@@ -9,4 +9,6 @@ urlpatterns = [
     path('profile/', profile, name='Profile'),
     path('profileEdit/', profileEdit, name='ProfileEdit'),
     path('addAvatar/', addAvatar, name='addAvatar'),
+    path('inbox/', inbox, name='Inbox'),
+    path('sendMessage/', sendMessage, name='sendMessage'),
 ]
