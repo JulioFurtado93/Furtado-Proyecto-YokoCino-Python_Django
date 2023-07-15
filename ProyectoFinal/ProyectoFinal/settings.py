@@ -134,5 +134,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # REDIRECTS DE SESION
 
 LOGIN_URL = 'Accounts/login'
-LOGIN_REDIRECT_URL = 'YokoCino/home'
-LOGOUT_REDIRECT_URL = 'YokoCino/home'
+LOGIN_REDIRECT_URL = 'YokoCino/inicio'
+LOGOUT_REDIRECT_URL = 'YokoCino/inicio'
+
+SITE_ID = 1

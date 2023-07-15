@@ -1,8 +1,0 @@
-<h2>{{ publicacion.titulo }}</h2>
-<h3>{{ publicacion.subtitulo }}</h3>
-<p>{{ publicacion.cuerpo }}</p>
-<p>Autor: {{ publicacion.autor }}</p>
-<p>Fecha: {{ publicacion.fecha }}</p>
-<img src="{{ publicacion.imagen.url }}" alt="Imagen del blog">
-
-<a href="{% url 'detalle_publicacion' pk=publicacion.pk %}">Ver versión extendida</a>

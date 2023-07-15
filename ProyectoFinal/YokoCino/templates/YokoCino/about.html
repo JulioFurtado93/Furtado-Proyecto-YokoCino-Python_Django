@@ -1,12 +1,22 @@
-<div>
-    {% extends "YokoCino/inicio.html" %}
-    {% load static %}
-        {% block bloqueDinamico %}
-            <p class="container_main">
-                Este blog fue creado para compartir recetas.
-                Es una idea sencilla para cubrir las consignas del Proyecto Final
-                para CoderHouse - Python #54485
-                por Furtado, Julio Cesar
-            </p>
-        {% endblock %}
-</div>
+{% extends 'YokoCino/inicio.html' %}
+{% load static %}
+
+{% block title %}
+    About
+{% endblock title %}
+
+{% block main_title %}
+    <h1>About</h1>
+{% endblock main_title %}
+
+{% block busqueda %}
+{% endblock busqueda %}
+
+{% block main_content %}
+    <p class="container_main">
+        Este blog fue creado para compartir recetas.
+        Es una idea sencilla para cubrir las consignas del Proyecto Final
+        para CoderHouse - Python #54485
+        por Furtado, Julio Cesar
+    </p>
+{% endblock main_content %}

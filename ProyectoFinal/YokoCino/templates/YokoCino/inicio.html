@@ -2,153 +2,192 @@
 <html lang="en">
     <head>
         {% load static %}
-        <!-- basic -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- mobile metas -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-        <!-- site metas -->
-        <title>YokoCino</title>
-        <meta name="keywords" content="">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <!-- bootstrap css -->
-        <link rel="stylesheet" type="text/css" href="{% static 'YokoCino/css/bootstrap.min.css'%}"/>
-        <!-- style css -->
-        <link rel="stylesheet" type="text/css" href="{% static 'YokoCino/css/style.css'%}">
-        <!-- overwrite css -->
-        <link rel="stylesheet" type="text/css" href="{% static 'YokoCino/css/overwrite.css'%}"/>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>{% block title %}YokoCino | Inicio{% endblock title %}</title>
+        <link rel="icon" type="image/x-icon" href="" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS -->
+        <link href="{% static 'Yokocino/css/styles.css' %}" rel="stylesheet" />
+        <link href="{% static 'Yokocino/css/overwrite.css' %}" rel="stylesheet" />
     </head>
     <body>
-    <!--header section start -->
-    <div class="header_section">
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="logo"><a href="{% url 'Home' %}"><img src="{% static 'YokoCino/assets/logo.png'%}"></a></div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="{% url 'Inicio' %}">Yoko Cino</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url 'Home' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'Blog' %}">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'About' %}">About</a>
-                        </li>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Inicio' %}">Home</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle px-lg-3 py-3 py-lg-4" href="#" id="categoriasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
+                                <ul class="dropdown-menu" aria-labelledby="categoriasDropdown">
+                                    <li><a class="dropdown-item" href="{% url 'Carnes' %}">Carnes</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'Guisos' %}">Guisos</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'Ensaladas' %}">Ensaladas</a></li>
+                                </ul>
+                            </li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'About' %}">About</a></li>
                         {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Accounts/profile/">Perfil</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle px-lg-3 py-3 py-lg-4" href="#" id="nuevoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Nuevo</a>
+                            <ul class="dropdown-menu" aria-labelledby="nuevoDropdown">
+                                <li><a class="dropdown-item" href="{% url 'setPost' %}">Nuevo Post</a></li>
+                                <li><a class="dropdown-item" href="{% url 'setAutor' %}">Nuevo Autor</a></li>
+                                <li><a class="dropdown-item" href="{% url 'setCategoria' %}">Nueva Categoria</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Accounts/logout/">Cerrar sesión</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/Accounts/profile/">Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/Accounts/logout/">Cerrar sesión</a></li>
                         {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Accounts/login/">Iniciar sesión</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Accounts/register/">Registrarse</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/Accounts/login/">Iniciar sesión</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/Accounts/register/">Registrarse</a></li>
                         {% endif %}
-                        <!--
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-                        </li>
-                        -->
                     </ul>
                 </div>
-            </nav>
-        </div>
-    </div>
-    <!--header section end -->
-    <!-- gallery section start -->
-    <div class="gallery_section layout_padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1 class="gallery_taital">Yoko Cino</h1>
-                    <p class="gallery_text">Blog para compartir las recetas de la awela</p>
-                </div>
             </div>
-            <div class="container">
-                <!--
-                <p class="container_main">Dinamico</p>
-                -->
-                {% block bloqueDinamico %}
-                {% endblock %}
-            </div>
-    <!-- gallery section end -->
-    <!-- footer section start -->
-    <div class="footer_section layout_padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <h3 class="useful_text">Nosotros</h3>
-                    <p class="footer_text">Nadie merece a las abuelas, vos tampoco, pero seguro hay una receta para inmortalizar. No seas rata, yo tambien quiero probar el guiso de tu awela</p>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <h3 class="useful_text">Menu</h3>
-                    <div class="footer_menu">
-                        <ul>
-                            <li><a href="{% url 'Home' %}">Home</a></li>
-                            <li><a href="{% url 'Blog' %}">Blog</a></li>
-                            <li><a href="{% url 'About' %}">About</a></li>
-                            <!--
-                            {% if not request.user.is_authenticated %}
-                            -->
-                            <li><a href="/Accounts/Login">Iniciar sesión</a></li>
-                            <li><a href="../Accounts/register">Registrarse</a></li>
-                            <!--
-                            {% endif %}
-                            {% if request.user.is.authenticated %}
-                            <li><p class="text-muted small mb-4 mb-lg-0">Hola, {{user.username}}</p></li>
-                            {% endif %}
-                            -->
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <h1 class="useful_text">Links Útiles</h1>
-                    <p class="dummy_text">Placeholder modificable con links</p>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <h1 class="useful_text">Contacto</h1>
-                    <div class="location_text">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i><span class="padding_left_10">Dirección : Calle ejemplo</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                <i class="fa fa-phone" aria-hidden="true"></i><span class="padding_left_10">Teléfono : +54 1234567890</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                <i class="fa fa-envelope" aria-hidden="true"></i><span class="padding_left_10">Email : ejemplo@gmail.com</span>
-                                </a>
-                            </li>
-                        </ul>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url({% block back_img %}{% static 'Yokocino/assets/home-bg.jpg' %}{% endblock back_img %})">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>{% block main_title %}YokoCino{% endblock main_title %}</h1>
+                        </div>
                     </div>
                 </div>
             </div>
+        </header>
+{% block busqueda %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 search">
+            <form class="" action="{% url 'Inicio' %}" method="get">
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                        <input type="text" class="form-control" placeholder="Buscar" name="buscar">
+                        <span class="input-group-list">
+                            <i class="icon icon-search"></i>
+                            <button type="submit" class="boton btn-primary">Buscar</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-    <!-- footer section end -->
-    <!-- copyright section start -->
-        <div class="copyright_section">
-            <div class="container">
-                <p class="copyright_text">2023 Todos los derechos reservados. Desarrollado por Furtado, Julio César como proyecto final para CoderHouse - Python #54485</a></p>
+</div>
+{% endblock busqueda %}
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                {% block main_content %}
+                    <!-- Post preview-->
+                    {% if posts %}
+                        {% for post in posts %}
+                            <div class="post-preview">
+                                <a href="{% url 'detalle_post' post.slug %}">
+                                    <h2 class="post-title">{{ post.titulo }}</h2>
+                                    <h3 class="post-subtitle">{{ post.descripcion }}</h3>
+                                </a>
+                                <p class="post-meta">
+                                    Creado por
+                                    <strong>{{ post.autor }}</strong>
+                                    el {{ post.fecha_creacion }}
+                                </p>
+                                {% if staff_group in user.groups.all or user.is.superuser%}
+                                    <a href="{% url 'editar_post' post.slug %}" class="btn btn-primary">Editar post</a>
+                                {% endif %}
+                            </div>
+                            <hr class="my-4" />
+                        {% endfor %}
+                    {% else %}
+                        <h1>No hay post registrados</h1>
+                    {% endif %}
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Pager-->
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 float-left">
+                                {% if posts.has_previous %}
+                                    <div class="clearfix">
+                                        <a href="?page={{ posts.previous_page_number }}
+                                        {% if request.GET.search %}
+                                        &q={{ request.GET.search }}
+                                        {% endif %}
+                                        " class="btn btn-primary float-left">Anterior</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 float-right">
+                                {% if posts.has_next %}
+                                    <div class="clearfix">
+                                        <a href="?page={{ posts.next_page_number }}" class="btn btn-primary float-left">Siguiente</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                    -->
+                </div>
+                {% endblock main_content %}
             </div>
         </div>
-    <!-- copyright section end -->        
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2023</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'js/scripts.js' %}"></script>
     </body>
 </html>

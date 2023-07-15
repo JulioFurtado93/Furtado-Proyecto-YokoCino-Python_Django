@@ -13,7 +13,7 @@ def login_request(request):
         user = authenticate(username = request.POST['user'], password = request.POST['password'])
         if user is not None:
             login(request, user)
-            return redirect('/YokoCino/')
+            return redirect(reverse('Inicio'))
         else:
             return render(request, 'Accounts/login.html', {'error': 'Usuario o contraseña incorrectos'})
     else:
@@ -26,7 +26,7 @@ def register(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             form.save()
-            return render(request,"YokoCino/home.html" ,  {"mensaje":"Usuario Creado :)"})
+            return render(request,"YokoCino/inicio.html")
     else:
         #form = UserCreationForm()       
         form = UserRegisterForm()     
@@ -34,7 +34,7 @@ def register(request):
 
 def logout_request(request):
     logout(request)
-    return redirect(reverse('Home'))
+    return redirect(reverse('Inicio'))
 
 @login_required  
 def profile(request):
@@ -55,7 +55,12 @@ def profileEdit(request):
             usuario.first_name = informacion['first_name']
             usuario.last_name = informacion['last_name']
             usuario.save()
-            return render(request, "YokoCino/home.html")
+
+            user_link, _ = UserLink.objects.get_or_create(user=usuario)
+            user_link.descripcion = informacion['descripcion']
+            user_link.link = informacion['link']
+            user_link.save()
+            return render(request, "YokoCino/inicio.html")
     else:
         miFormulario = UserEditForm(initial={'email': usuario.email})
     return render(request, "Accounts/profileEdit.html", {"miFormulario": miFormulario, "usuario": usuario,"avatar_url":avatar_url})
@@ -66,9 +71,9 @@ def addAvatar(request):
         miFormulario = AvatarForm(request.POST, request.FILES)
         if miFormulario.is_valid:
             u = User.objects.get(username=request.user)
-            avatar = Avatar(user=u, imagen=miFormulario.cleaned_data['imagen'])
+            avatar = Avatar(user=u, imagen=miFormulario.cleaned_data['avatar'])
             avatar.save()
-            return render(request,"YokoCino/home.html")
+            return render(request,"YokoCino/inicio.html")
     else:
         miFormulario = AvatarForm()
     return render(request,"Accounts/addAvatar.html",{'miFormulario':miFormulario})
