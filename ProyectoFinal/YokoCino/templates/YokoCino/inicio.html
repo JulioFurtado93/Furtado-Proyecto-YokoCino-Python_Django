@@ -29,12 +29,24 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Inicio' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Carnes' %}">Carnes</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Guisos' %}">Guisos</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Ensaladas' %}">Ensaladas</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle px-lg-3 py-3 py-lg-4" href="#" id="categoriasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
+                                <ul class="dropdown-menu" aria-labelledby="categoriasDropdown">
+                                    <li><a class="dropdown-item" href="{% url 'Carnes' %}">Carnes</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'Guisos' %}">Guisos</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'Ensaladas' %}">Ensaladas</a></li>
+                                </ul>
+                            </li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'About' %}">About</a></li>
                         {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'setPost' %}">Nuevo Post</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle px-lg-3 py-3 py-lg-4" href="#" id="nuevoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Nuevo</a>
+                            <ul class="dropdown-menu" aria-labelledby="nuevoDropdown">
+                                <li><a class="dropdown-item" href="{% url 'setPost' %}">Nuevo Post</a></li>
+                                <li><a class="dropdown-item" href="{% url 'setAutor' %}">Nuevo Autor</a></li>
+                                <li><a class="dropdown-item" href="{% url 'setCategoria' %}">Nueva Categoria</a></li>
+                            </ul>
+                        </li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/Accounts/profile/">Perfil</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/Accounts/logout/">Cerrar sesión</a></li>
                         {% else %}
@@ -94,7 +106,7 @@
                                     <strong>{{ post.autor }}</strong>
                                     el {{ post.fecha_creacion }}
                                 </p>
-                                {% if user.is_authenticated %}
+                                {% if staff_group in user.groups.all or user.is.superuser%}
                                     <a href="{% url 'editar_post' post.slug %}" class="btn btn-primary">Editar post</a>
                                 {% endif %}
                             </div>
