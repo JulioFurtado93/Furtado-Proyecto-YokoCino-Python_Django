@@ -17,7 +17,8 @@
 
 {% block main_content %}
                 <p>Crear publicación</p>
-                <form action="/YokoCino/setPost/" method="post"> {% csrf_token %}
+                <form action="/YokoCino/setPost/" method="post" enctype="multipart/form-data"> 
+                    {% csrf_token %}
                     <table>
                         {{ miFormulario.as_table }}
                     </table>

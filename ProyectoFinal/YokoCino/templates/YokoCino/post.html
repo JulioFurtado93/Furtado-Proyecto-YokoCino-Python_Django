@@ -6,7 +6,9 @@
 {% endblock title %}
 
 {% block back_img %}
-    {{detalle_post.imagen}}
+    {% if detalle_post.imagen %}
+        {{ detalle_post.imagen.url }}
+    {% endif %}
 {% endblock back_img %}
 
 {% block main_title %}
@@ -18,5 +20,7 @@
 {% endblock busqueda %}
 
 {% block main_content %}
+    <h4>{{detalle_post.titulo}}</h4>
     {{detalle_post.contenido | safe}}
+    <br><br>Creado por {{detalle_post.autor}}
 {% endblock main_content %}

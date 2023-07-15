@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
 from YokoCino.models import *
 from Accounts.models import *
 from YokoCino.forms import *
@@ -25,6 +25,9 @@ def inicio(request):
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     return render(request,'YokoCino/inicio.html',{'posts':posts})
+
+def home(request):
+    return render(request, "YokoCino/home.html")
 
 def about(request):
     return render(request, "YokoCino/about.html")
@@ -81,12 +84,20 @@ def detallePost(request,slug):
 @login_required
 def setPost(request):
     if request.method == 'POST':
-        miFormulario = formSetPost(request.POST)
-        if miFormulario.is_valid:
+        miFormulario = formSetPost(request.POST, request.FILES)
+        if miFormulario.is_valid():
             data = miFormulario.cleaned_data
-            post = Post(titulo=data["titulo"],slug=data["slug"],descripcion=data["descripcion"],contenido=data["contenido"],imagen=data["imagen"],autor=data["autor"],categoria=data["categoria"],estado=data["estado"])    
+            post = Post(
+                titulo=data["titulo"],
+                slug=data["slug"],
+                descripcion=data["descripcion"],
+                contenido=data["contenido"],
+                imagen=request.FILES["imagen"],
+                autor=data["autor"],
+                categoria=data["categoria"],
+                estado=data["estado"])    
             post.save()
-            return render(request,"YokoCino/home.html")    
+            return render(request,"YokoCino/inicio.html")    
     else:
         miFormulario = formSetPost()
     return render(request, "YokoCino/setPost.html", {"miFormulario":miFormulario})
@@ -121,4 +132,15 @@ def setPost(request):
 #    publicacion = get_object_or_404(Blog, pk=pk)
 #    return render(request, 'detalle_publicacion.html', {'publicacion': publicacion})
 
+def editPost(request, slug):
+    post = get_object_or_404(Post, slug=slug)
 
+    if request.method == 'POST':
+        miFormulario = formSetPost(request.POST, request.FILES, instance=post)
+        if miFormulario.is_valid():
+            miFormulario.save()
+            return redirect('detalle_post', slug=post.slug)
+    else:
+        miFormulario = formSetPost(instance=post)
+
+    return render(request, 'YokoCino/editPost.html', {'miFormulario': miFormulario, 'post': post})

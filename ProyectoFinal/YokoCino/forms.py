@@ -10,6 +10,7 @@ class formSetBlog(forms.Form):
     imagen = forms.ImageField()
 
 class formSetPost(forms.ModelForm):
+    imagen = forms.ImageField(required=False)
     class Meta:
         model = Post
         fields = ['titulo', 'slug', 'descripcion', 'contenido', 'imagen', 'autor', 'categoria', 'estado']
