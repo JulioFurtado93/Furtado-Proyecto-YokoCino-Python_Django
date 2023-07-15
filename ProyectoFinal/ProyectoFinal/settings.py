@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Accounts',
     'Messages',
     'YokoCino',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

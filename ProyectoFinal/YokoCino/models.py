@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 #class Blog(models.Model):
@@ -45,7 +46,7 @@ class Post(models.Model):
     titulo = models.CharField('Titulo',max_length = 100, null= False, blank= False)
     slug = models.CharField('Slug',max_length = 100, null= False, blank= False)
     descripcion = models.CharField('Descripcion',max_length = 150, null= False, blank= False)
-    contenido = models.TextField('Contenido')
+    contenido = RichTextField('Contenido')
     #imagen = models.URLField('Imagen',max_length = 255, null = False, blank = False)
     imagen = models.ImageField(upload_to='blogimg', null=True, blank=True)
     autor = models.ForeignKey(Autor,on_delete=models.CASCADE)
