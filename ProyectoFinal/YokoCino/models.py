@@ -2,16 +2,6 @@ from django.db import models
 from ckeditor.fields import RichTextField
 
 # Create your models here.
-#class Blog(models.Model):
-#    title = models.CharField(max_length=100)
-#    subtitle = models.CharField(max_length=100)
-#    cuerpo = models.TextField(max_length=1000)
-#    author = models.CharField(max_length=40)
-#    fecha = models.DateField()
-#    imagen = models.ImageField(upload_to='blogimg', null=True, blank=True)
-#
-#    def __str__(self):
-#        return self.title
     
 class Categoria(models.Model):
     id = models.AutoField(primary_key = True)
@@ -25,7 +15,11 @@ class Categoria(models.Model):
     
     def __str__(self):
         return self.nombre
-    
+
+"""
+El modelo Categoria sirve para categorizar posts. Las mismas pueden activarse o desactivarse para permanecer ocultas
+"""
+
 class Autor(models.Model):
     id = models.AutoField(primary_key = True)
     nombre = models.CharField('Nombre de Autor',max_length = 50, null= False, blank= False)
@@ -40,14 +34,17 @@ class Autor(models.Model):
         verbose_name_plural = 'Autores'
     def __str__(self):
         return '{0},{1}'.format(self.apellido, self.nombre)
-    
+
+"""
+El modelo Autor funciona de manera similar, con mas informacion de usuario personalizable
+"""
+
 class Post(models.Model):
     id = models.AutoField(primary_key = True)
     titulo = models.CharField('Titulo',max_length = 100, null= False, blank= False)
     slug = models.CharField('Slug',max_length = 100, null= False, blank= False)
     descripcion = models.CharField('Descripcion',max_length = 150, null= False, blank= False)
     contenido = RichTextField('Contenido')
-    #imagen = models.URLField('Imagen',max_length = 255, null = False, blank = False)
     imagen = models.ImageField(upload_to='blogimg', null=True, blank=True)
     autor = models.ForeignKey(Autor,on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria,on_delete=models.CASCADE)
@@ -60,3 +57,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+"""
+Post es el modelo principal del blog.
+* slug sirve para pasarse luego por url y mostrar en produccion la informacion completa
+* se agrego ckeditor para poder editar de manera mas comoda desde el admin y se muestre mejor en produccion
+* en caso de eliminarse autor o categoria, se eliminarian tambien en cascada de la base de datos
+"""

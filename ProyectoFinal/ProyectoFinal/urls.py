@@ -24,7 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('YokoCino/',include('YokoCino.urls')),
     path('Accounts/',include('Accounts.urls'),),
-    #path('Messages/',include('Messages.urls'))
 ]
 
 urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
