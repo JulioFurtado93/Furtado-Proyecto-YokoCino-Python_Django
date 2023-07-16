@@ -95,7 +95,7 @@ profileEdit permite editarlo en caso de querer realizar una modificacion
 def addAvatar(request):
     if request.method == 'POST':
         miFormulario = AvatarForm(request.POST, request.FILES)
-        if miFormulario.is_valid:
+        if miFormulario.is_valid():
             u = User.objects.get(username=request.user)
             avatar = Avatar(user=u, imagen=miFormulario.cleaned_data['avatar'])
             avatar.save()
